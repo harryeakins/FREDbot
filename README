@@ -35,11 +35,14 @@
 Friendly Recycling Encouragement Droid
 
 Directory Structure:
-== /ros ==
-ROS Packages
+== /android ==
+Android code
  
 == /arduino ==
 Arduino code
 
 == /docs ==
-Documentation and repor
+Documentation and reports
+
+== /ros ==
+ROS packages
