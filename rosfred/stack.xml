@@ -1,0 +1,9 @@
+<stack>
+  <description brief="rosfred">rosfred</description>
+  <author>Maintained by fred</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/rosfred</url>
+  <depend stack="ros" />
+
+</stack>
