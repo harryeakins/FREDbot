@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="org/|org/apache/|org/apache/thrift/|org/apache/thrift/async/|org/apache/thrift/meta_data/|org/apache/thrift/protocol/|org/apache/thrift/server/|org/apache/thrift/server/THsHaServer.java|org/apache/thrift/server/TNonblockingServer.java|org/apache/thrift/server/TServer.java|org/apache/thrift/server/TServlet.java|org/apache/thrift/server/TSimpleServer.java|org/apache/thrift/server/TThreadPoolServer.java|org/apache/thrift/transport/" kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="lib" path="slf4j-api-1.6.4.jar"/>
+	<classpathentry kind="lib" path="slf4j-simple-1.6.4.jar"/>
+	<classpathentry kind="lib" path="libthrift-0.6.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
