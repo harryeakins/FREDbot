@@ -150,7 +150,7 @@ class setFocus_args:
 
   thrift_spec = (
     None, # 0
-    (1, TType.STRUCT, 'focus', (location, location.thrift_spec), None, ), # 1
+    (1, TType.STRUCT, 'focus', (Location, Location.thrift_spec), None, ), # 1
   )
 
   def __init__(self, focus=None,):
@@ -167,7 +167,7 @@ class setFocus_args:
         break
       if fid == 1:
         if ftype == TType.STRUCT:
-          self.focus = location()
+          self.focus = Location()
           self.focus.read(iprot)
         else:
           iprot.skip(ftype)
