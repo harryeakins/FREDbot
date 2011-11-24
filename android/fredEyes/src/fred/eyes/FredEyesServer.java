@@ -27,13 +27,13 @@ public class FredEyesServer extends AsyncTask<Void, Integer, Integer> implements
     
     @Override
     public void setFocus(Location focus) throws TException {
-        publishProgress(focus.x, focus.y, focus.z, -1);
+        publishProgress(0,focus.x, focus.y, focus.z);
         
     }
     
     @Override
     public void setHappiness(int happyIndex) throws TException {
-        publishProgress(-1,-1,-1,happyIndex);
+        publishProgress(1,happyIndex);
     }
     
     /**
@@ -43,11 +43,11 @@ public class FredEyesServer extends AsyncTask<Void, Integer, Integer> implements
      */
     @Override
     protected void onProgressUpdate(Integer... values) {
-        if(values[0] >= 0 && values[3] < 0) {//setFocus
-        	panel.focus= new Coordinate(values[0],values[1],values[2]);
+        if(values[0] ==0) {//setFocus
+        	panel.focus= new Coordinate(values[1],values[2],values[3]);
         	panel.invalidate();
-        } else if(values[0] < 0 && values[3] >= 0) {
-        	panel.happiness=values[3];
+        } else if(values[0] ==1) {//setHappiness
+        	panel.happiness=values[1];
         	panel.invalidate();
         } else{
         }

@@ -38,39 +38,49 @@ public class FredEyesActivity extends Activity {
 			super(context);
 		}
 		
-		private Paint eyewPaint; 
-		public Coordinate focus = new Coordinate(50,50,5);
-		public int happiness = 5;
-		String text = "default";
+//		public void centreImageAt(Bitmap image, int x, int y, Canvas canvas){
+//			canvas.drawBitmap(image,x-image.getWidth()/2, y-image.getHeight()/2, null);
+//		}
+		
+		public Coordinate focus = new Coordinate(0,0,0);
+		public int happiness = 0;
+		public int happyOffset=3;
+		String text = "defaulty";
 
 		@Override
+		
         public void onDraw(Canvas canvas) {
+			
         	try{
         		Paint paint = new Paint();
         		paint.setStyle(Paint.Style.FILL);
         		
         		// make the entire canvas black
-        		paint.setColor(Color.BLACK);
+        		paint.setColor(Color.WHITE);
         		canvas.drawPaint(paint);
         		
-        		Coordinate eyeSize = new Coordinate(230,300,100);
-        		
-        		Coordinate eyeL = new Coordinate((int)(getWidth()*0.25),(int)(getHeight()*0.5),eyeSize.z);
-        		Coordinate eyeR = new Coordinate((int)(getWidth()*0.75),(int)(getHeight()*0.5),eyeSize.z);
+        		Coordinate eyewSize = new Coordinate(300,400,100);//width 460, height 600, pupil radius 200
+        		Coordinate eyeCentreL = new Coordinate((int)(canvas.getWidth()*0.25),(int)(canvas.getHeight()*0.55),0);
+        		Coordinate eyeCentreR = new Coordinate((int)(canvas.getWidth()*0.75),(int)(canvas.getHeight()*0.55),0);
+        		Coordinate pupilInset =  new Coordinate((int)(eyewSize.x*0),0,0);
+        		//Coordinate eyeL = new Coordinate((int)(getWidth()*0.25),(int)(getHeight()*0.5),eyeSize.z);
+        		//Coordinate eyeR = new Coordinate((int)(getWidth()*0.75),(int)(getHeight()*0.5),eyeSize.z);
         		
         		Bitmap pupilImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.pupil);
         		int pupilRadius=pupilImage.getWidth()/2;
 
-        		Coordinate pupilShiftL = new Coordinate(eyeSize.x/2,eyeL.angleTo(focus));
-        		Coordinate pupilShiftR = new Coordinate(eyeSize.x/2,eyeR.angleTo(focus));
-        		Coordinate pupilL = eyeL.add(pupilShiftL);
-        		Coordinate pupilR = eyeR.add(pupilShiftR);
+        		//Coordinate pupilShiftL = new Coordinate(eyeSize.x/2,eyeL.angleTo(focus));
+        		//Coordinate pupilShiftR = new Coordinate(eyeSize.x/2,eyeR.angleTo(focus));
+        		Coordinate pupilCentreL = eyeCentreL.add(focus).add(pupilInset);
+        		Coordinate pupilCentreR = eyeCentreR.add(focus).subtract(pupilInset);
+        		Coordinate pupilImageL = new Coordinate(pupilCentreL.x-pupilRadius,pupilCentreL.y-pupilRadius,0);
+        		Coordinate pupilImageR = new Coordinate(pupilCentreR.x-pupilRadius,pupilCentreR.y-pupilRadius,0);
         		
-        		RadialGradient eyelShader =new RadialGradient(pupilL.x, pupilL.y, 500, Color.WHITE, Color.BLACK,TileMode.CLAMP);
-        		RadialGradient eyerShader =new RadialGradient(pupilR.x, pupilR.y, 500, Color.WHITE, Color.BLACK,TileMode.CLAMP);
-        		RectF eyelRec = new RectF(eyeL.x-eyeSize.x, eyeL.y-eyeSize.y,eyeL.x+eyeSize.x, eyeL.y+eyeSize.y);
-        		RectF eyerRec = new RectF(eyeR.x-eyeSize.x, eyeR.y-eyeSize.y,eyeR.x+eyeSize.x, eyeR.y+eyeSize.y);
-        		eyewPaint = new Paint();  
+        		RadialGradient eyelShader =new RadialGradient(pupilCentreL.x, pupilCentreL.y, 500, Color.WHITE, Color.BLACK,TileMode.CLAMP);
+        		RadialGradient eyerShader =new RadialGradient(pupilCentreR.x, pupilCentreR.y, 500, Color.WHITE, Color.BLACK,TileMode.CLAMP);
+        		RectF eyelRec = new RectF(eyeCentreL.x-eyewSize.x, eyeCentreL.y-eyewSize.y,eyeCentreL.x+eyewSize.x, eyeCentreL.y+eyewSize.y);
+        		RectF eyerRec = new RectF(eyeCentreR.x-eyewSize.x, eyeCentreR.y-eyewSize.y,eyeCentreR.x+eyewSize.x, eyeCentreR.y+eyewSize.y);
+        		Paint eyewPaint = new Paint();  
         		  eyewPaint.setDither(true);  
         		  eyewPaint.setColor(Color.WHITE);  
         		  eyewPaint.setStyle(Paint.Style.FILL);
@@ -79,9 +89,24 @@ public class FredEyesActivity extends Activity {
         		  eyewPaint.setShader(eyerShader);
         		canvas.drawOval(eyerRec, eyewPaint);
         	
-        		canvas.drawBitmap(pupilImage,pupilR.x-pupilRadius, pupilR.y-pupilRadius, paint);
-        		canvas.drawBitmap(pupilImage,pupilL.x-pupilRadius, pupilL.y-pupilRadius, paint);
-        		
+        		canvas.drawBitmap(pupilImage,pupilImageL.x, pupilImageL.y, null);
+        		canvas.drawBitmap(pupilImage,pupilImageR.x, pupilImageR.y, null);
+
+        		Bitmap[] emotionMask = {
+                        BitmapFactory.decodeResource(this.getResources(), R.drawable.happy_13),
+                        BitmapFactory.decodeResource(this.getResources(), R.drawable.happy_8),
+                        BitmapFactory.decodeResource(this.getResources(), R.drawable.happy_5),
+                        BitmapFactory.decodeResource(this.getResources(), R.drawable.happy_3),
+                        BitmapFactory.decodeResource(this.getResources(), R.drawable.happy0),
+                        BitmapFactory.decodeResource(this.getResources(), R.drawable.happy8),
+                        BitmapFactory.decodeResource(this.getResources(), R.drawable.happy10)};
+                int emotionNum=0;
+                if (happiness>=-happyOffset && happiness<=happyOffset){
+                    emotionNum=happiness+happyOffset;
+                }else{
+                    emotionNum=happyOffset;
+                }
+        		canvas.drawBitmap(emotionMask[emotionNum],0, 0, null);
 //        		RectF eyeBrowL = eyelRec;
 //        		eyeBrowL.offsetTo(0, 100);
 //        		eyeBrowL.inset(0, 150);
