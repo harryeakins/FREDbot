@@ -35,6 +35,10 @@ emote_text.h
 /home/kipman725/ros_workspace/speech_synth/src/emote_text.h
 sstream
 -
+iostream
+-
+fstream
+-
 
 /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/include/ros/advertise_options.h
 ros/forwards.h
