@@ -22,7 +22,7 @@ int espk(float emotion, string text)
 {
 	float a, s, p; 
 	char output[1024];
-	char *input, *p;	
+	char *input;	
 
 	//Convert c++ string to c string	
 	input = new char [text.size()+1];

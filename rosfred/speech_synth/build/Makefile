@@ -122,6 +122,19 @@ ROSBUILD_genmsg_lisp/fast:
 .PHONY : ROSBUILD_genmsg_lisp/fast
 
 #=============================================================================
+# Target rules for targets named ROSBUILD_genmsg_py
+
+# Build rule for target.
+ROSBUILD_genmsg_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_genmsg_py
+.PHONY : ROSBUILD_genmsg_py
+
+# fast build rule for target.
+ROSBUILD_genmsg_py/fast:
+	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_py.dir/build.make CMakeFiles/ROSBUILD_genmsg_py.dir/build
+.PHONY : ROSBUILD_genmsg_py/fast
+
+#=============================================================================
 # Target rules for targets named ROSBUILD_gensrv_cpp
 
 # Build rule for target.
@@ -200,6 +213,19 @@ rospack_genmsg/fast:
 .PHONY : rospack_genmsg/fast
 
 #=============================================================================
+# Target rules for targets named rospack_genmsg_all
+
+# Build rule for target.
+rospack_genmsg_all: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rospack_genmsg_all
+.PHONY : rospack_genmsg_all
+
+# fast build rule for target.
+rospack_genmsg_all/fast:
+	$(MAKE) -f CMakeFiles/rospack_genmsg_all.dir/build.make CMakeFiles/rospack_genmsg_all.dir/build
+.PHONY : rospack_genmsg_all/fast
+
+#=============================================================================
 # Target rules for targets named rospack_genmsg_libexe
 
 # Build rule for target.
@@ -237,6 +263,19 @@ speech_synth: cmake_check_build_system
 speech_synth/fast:
 	$(MAKE) -f CMakeFiles/speech_synth.dir/build.make CMakeFiles/speech_synth.dir/build
 .PHONY : speech_synth/fast
+
+#=============================================================================
+# Target rules for targets named talker
+
+# Build rule for target.
+talker: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 talker
+.PHONY : talker
+
+# fast build rule for target.
+talker/fast:
+	$(MAKE) -f CMakeFiles/talker.dir/build.make CMakeFiles/talker.dir/build
+.PHONY : talker/fast
 
 #=============================================================================
 # Target rules for targets named test
@@ -318,6 +357,21 @@ src/speech_synth.s:
 	$(MAKE) -f CMakeFiles/speech_synth.dir/build.make CMakeFiles/speech_synth.dir/src/speech_synth.s
 .PHONY : src/speech_synth.s
 
+# target to build an object file
+src/talker.o:
+	$(MAKE) -f CMakeFiles/talker.dir/build.make CMakeFiles/talker.dir/src/talker.o
+.PHONY : src/talker.o
+
+# target to preprocess a source file
+src/talker.i:
+	$(MAKE) -f CMakeFiles/talker.dir/build.make CMakeFiles/talker.dir/src/talker.i
+.PHONY : src/talker.i
+
+# target to generate assembly for a file
+src/talker.s:
+	$(MAKE) -f CMakeFiles/talker.dir/build.make CMakeFiles/talker.dir/src/talker.s
+.PHONY : src/talker.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -326,6 +380,7 @@ help:
 	@echo "... depend"
 	@echo "... ROSBUILD_genmsg_cpp"
 	@echo "... ROSBUILD_genmsg_lisp"
+	@echo "... ROSBUILD_genmsg_py"
 	@echo "... ROSBUILD_gensrv_cpp"
 	@echo "... ROSBUILD_gensrv_lisp"
 	@echo "... clean-test-results"
@@ -334,9 +389,11 @@ help:
 	@echo "... rosbuild_precompile"
 	@echo "... rosbuild_premsgsrvgen"
 	@echo "... rospack_genmsg"
+	@echo "... rospack_genmsg_all"
 	@echo "... rospack_genmsg_libexe"
 	@echo "... rospack_gensrv"
 	@echo "... speech_synth"
+	@echo "... talker"
 	@echo "... test"
 	@echo "... test-future"
 	@echo "... test-results"
@@ -345,6 +402,9 @@ help:
 	@echo "... src/speech_synth.o"
 	@echo "... src/speech_synth.i"
 	@echo "... src/speech_synth.s"
+	@echo "... src/talker.o"
+	@echo "... src/talker.i"
+	@echo "... src/talker.s"
 .PHONY : help
 
 

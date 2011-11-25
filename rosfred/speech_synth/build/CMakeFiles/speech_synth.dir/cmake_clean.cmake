@@ -1,4 +1,7 @@
 FILE(REMOVE_RECURSE
+  "../msg_gen"
+  "../src/speech_synth/msg"
+  "../msg_gen"
   "CMakeFiles/speech_synth.dir/src/speech_synth.o"
   "../bin/speech_synth.pdb"
   "../bin/speech_synth"

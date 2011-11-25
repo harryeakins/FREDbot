@@ -1,4 +1,7 @@
 FILE(REMOVE_RECURSE
+  "../msg_gen"
+  "../src/speech_synth/msg"
+  "../msg_gen"
   "CMakeFiles/test"
 )
 

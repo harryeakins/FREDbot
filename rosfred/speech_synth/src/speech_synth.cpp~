@@ -1,12 +1,13 @@
 #include "ros/ros.h"
-#include "std_msgs/String.h"
+//#include "std_msgs/String.h"
 #include "espk.h" //espk based voice synth
+#include "emote_text.h" //custom message type
 
 //The speech synthersiser!
-void chatterCallback(const std_msgs::String::ConstPtr& msg)
+void chatterCallback(const speech_synth::emote_text::ConstPtr& msg)
 {
-  ROS_INFO("I heard: [%s]", msg->data.c_str());
-  espk(msg->data.c_str());	
+  ROS_INFO("I heard: [%s] with emotion [%f]", msg->text.c_str(), msg->emotion);
+  espk(msg->emotion, msg->text.c_str());	
 }
 
 int main(int argc, char **argv)
@@ -17,3 +18,4 @@ int main(int argc, char **argv)
   ros::spin();
   return 0;
 }
+

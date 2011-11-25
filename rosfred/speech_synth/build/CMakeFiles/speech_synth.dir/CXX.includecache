@@ -6,13 +6,29 @@
 
 #IncludeRegexTransform: 
 
+/home/kipman725/ros_workspace/speech_synth/src/emote_text.h
+string
+-
+vector
+-
+map
+-
+ostream
+-
+ros/serialization.h
+/home/kipman725/ros_workspace/speech_synth/src/ros/serialization.h
+ros/builtin_message_traits.h
+/home/kipman725/ros_workspace/speech_synth/src/ros/builtin_message_traits.h
+ros/message_operations.h
+/home/kipman725/ros_workspace/speech_synth/src/ros/message_operations.h
+ros/time.h
+/home/kipman725/ros_workspace/speech_synth/src/ros/time.h
+ros/macros.h
+/home/kipman725/ros_workspace/speech_synth/src/ros/macros.h
+ros/assert.h
+/home/kipman725/ros_workspace/speech_synth/src/ros/assert.h
+
 /home/kipman725/ros_workspace/speech_synth/src/espk.h
-stdio.h
--
-string.h
--
-stdlib.h
--
 iostream
 -
 cstring
@@ -23,10 +39,10 @@ string
 /home/kipman725/ros_workspace/speech_synth/src/speech_synth.cpp
 ros/ros.h
 /home/kipman725/ros_workspace/speech_synth/src/ros/ros.h
-std_msgs/String.h
-/home/kipman725/ros_workspace/speech_synth/src/std_msgs/String.h
 espk.h
 /home/kipman725/ros_workspace/speech_synth/src/espk.h
+emote_text.h
+/home/kipman725/ros_workspace/speech_synth/src/emote_text.h
 
 /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/include/ros/advertise_options.h
 ros/forwards.h
@@ -527,28 +543,6 @@ boost/type_traits/remove_reference.hpp
 -
 boost/type_traits/remove_const.hpp
 -
-
-/opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/cpp/include/std_msgs/String.h
-string
--
-vector
--
-map
--
-ostream
--
-ros/serialization.h
-/opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/cpp/include/std_msgs/ros/serialization.h
-ros/builtin_message_traits.h
-/opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/cpp/include/std_msgs/ros/builtin_message_traits.h
-ros/message_operations.h
-/opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/cpp/include/std_msgs/ros/message_operations.h
-ros/time.h
-/opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/cpp/include/std_msgs/ros/time.h
-ros/macros.h
-/opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/cpp/include/std_msgs/ros/macros.h
-ros/assert.h
-/opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/cpp/include/std_msgs/ros/assert.h
 
 /opt/ros/electric/stacks/ros_comm/tools/rosconsole/include/ros/assert.h
 ros/console.h

@@ -186,7 +186,7 @@ TOOLCHAINCONFIG:FILEPATH=TOOLCHAINCONFIG-NOTFOUND
 USERCONFIG:FILEPATH=USERCONFIG-NOTFOUND
 
 //Path to a file.
-_file_name:FILEPATH=/home/kipman725/ros_workspace/speech_synth/src/speech_synth.cpp
+_file_name:FILEPATH=/home/kipman725/ros_workspace/speech_synth/src/talker.cpp
 
 //Value Computed by CMake
 speech_synth_BINARY_DIR:STATIC=/home/kipman725/ros_workspace/speech_synth/build

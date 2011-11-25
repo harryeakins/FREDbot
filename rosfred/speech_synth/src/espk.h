@@ -8,10 +8,6 @@
 
 //function is passed an emotion value and a c++ string
 
-//#include <stdio.h>
-//#include <string.h>
-//#include <stdlib.h>
-
 #include <iostream>
 #include <cstring>
 #include <string>
