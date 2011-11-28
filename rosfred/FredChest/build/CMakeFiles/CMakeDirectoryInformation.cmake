@@ -11,6 +11,7 @@ SET(CMAKE_FORCE_UNIX_PATHS 1)
 # The C and CXX include file search paths:
 SET(CMAKE_C_INCLUDE_PATH
   "../include"
+  "/home/ubuntu/ros_workspace/rosfred/Planner/msg_gen/cpp/include"
   "/opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/include"
   "/opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/cpp/include"
   "/opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/cpp/include"

@@ -7,7 +7,7 @@ from Planner.msg import Mood
 
 def callback(msg):
     rgbvalue = int(((msg.data)%100)*2.55)
-    rospy.loginfo(rospy.get_name()+"Setting rgb value to %s",rgbvalue)
+    rospy.loginfo(rospy.get_name()+"I heard %s",rgbvalue)
     #screen resolution: (0,0) is current, flags: pygame.FULLSCREEN for fullscreen, depth.
     screenplane.fill((rgbvalue,rgbvalue,rgbvalue,0))
     pygame.display.update()
