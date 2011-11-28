@@ -4,13 +4,13 @@ import struct
 
 
 class Mood(roslib.message.Message):
-  _md5sum = "1f282c3faf48956454b4ac1f1ae8240a"
+  _md5sum = "da5909fbe378aeaf85e547e830cc1bb7"
   _type = "Planner/Mood"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """int32 mood
+  _full_text = """int32 data
 
 """
-  __slots__ = ['mood']
+  __slots__ = ['data']
   _slot_types = ['int32']
 
   def __init__(self, *args, **kwds):
@@ -21,7 +21,7 @@ class Mood(roslib.message.Message):
     changes.  You cannot mix in-order arguments and keyword arguments.
     
     The available fields are:
-       mood
+       data
     
     @param args: complete set of field values, in .msg order
     @param kwds: use keyword arguments corresponding to message field names
@@ -30,10 +30,10 @@ class Mood(roslib.message.Message):
     if args or kwds:
       super(Mood, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.mood is None:
-        self.mood = 0
+      if self.data is None:
+        self.data = 0
     else:
-      self.mood = 0
+      self.data = 0
 
   def _get_types(self):
     """
@@ -48,7 +48,7 @@ class Mood(roslib.message.Message):
     @type  buff: StringIO
     """
     try:
-      buff.write(_struct_i.pack(self.mood))
+      buff.write(_struct_i.pack(self.data))
     except struct.error as se: self._check_types(se)
     except TypeError as te: self._check_types(te)
 
@@ -62,7 +62,7 @@ class Mood(roslib.message.Message):
       end = 0
       start = end
       end += 4
-      (self.mood,) = _struct_i.unpack(str[start:end])
+      (self.data,) = _struct_i.unpack(str[start:end])
       return self
     except struct.error as e:
       raise roslib.message.DeserializationError(e) #most likely buffer underfill
@@ -77,7 +77,7 @@ class Mood(roslib.message.Message):
     @type  numpy module
     """
     try:
-      buff.write(_struct_i.pack(self.mood))
+      buff.write(_struct_i.pack(self.data))
     except struct.error as se: self._check_types(se)
     except TypeError as te: self._check_types(te)
 
@@ -93,7 +93,7 @@ class Mood(roslib.message.Message):
       end = 0
       start = end
       end += 4
-      (self.mood,) = _struct_i.unpack(str[start:end])
+      (self.data,) = _struct_i.unpack(str[start:end])
       return self
     except struct.error as e:
       raise roslib.message.DeserializationError(e) #most likely buffer underfill

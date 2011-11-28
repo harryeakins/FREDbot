@@ -22,17 +22,17 @@ struct Mood_ {
   typedef Mood_<ContainerAllocator> Type;
 
   Mood_()
-  : mood(0)
+  : data(0)
   {
   }
 
   Mood_(const ContainerAllocator& _alloc)
-  : mood(0)
+  : data(0)
   {
   }
 
-  typedef int32_t _mood_type;
-  int32_t mood;
+  typedef int32_t _data_type;
+  int32_t data;
 
 
 private:
@@ -43,14 +43,14 @@ public:
   ROS_DEPRECATED const std::string __getDataType() const { return __s_getDataType_(); }
 
 private:
-  static const char* __s_getMD5Sum_() { return "1f282c3faf48956454b4ac1f1ae8240a"; }
+  static const char* __s_getMD5Sum_() { return "da5909fbe378aeaf85e547e830cc1bb7"; }
 public:
   ROS_DEPRECATED static const std::string __s_getMD5Sum() { return __s_getMD5Sum_(); }
 
   ROS_DEPRECATED const std::string __getMD5Sum() const { return __s_getMD5Sum_(); }
 
 private:
-  static const char* __s_getMessageDefinition_() { return "int32 mood\n\
+  static const char* __s_getMessageDefinition_() { return "int32 data\n\
 \n\
 "; }
 public:
@@ -61,21 +61,21 @@ public:
   ROS_DEPRECATED virtual uint8_t *serialize(uint8_t *write_ptr, uint32_t seq) const
   {
     ros::serialization::OStream stream(write_ptr, 1000000000);
-    ros::serialization::serialize(stream, mood);
+    ros::serialization::serialize(stream, data);
     return stream.getData();
   }
 
   ROS_DEPRECATED virtual uint8_t *deserialize(uint8_t *read_ptr)
   {
     ros::serialization::IStream stream(read_ptr, 1000000000);
-    ros::serialization::deserialize(stream, mood);
+    ros::serialization::deserialize(stream, data);
     return stream.getData();
   }
 
   ROS_DEPRECATED virtual uint32_t serializationLength() const
   {
     uint32_t size = 0;
-    size += ros::serialization::serializationLength(mood);
+    size += ros::serialization::serializationLength(data);
     return size;
   }
 
@@ -107,12 +107,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::Planner::Mood_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "1f282c3faf48956454b4ac1f1ae8240a";
+    return "da5909fbe378aeaf85e547e830cc1bb7";
   }
 
   static const char* value(const  ::Planner::Mood_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0x1f282c3faf489564ULL;
-  static const uint64_t static_value2 = 0x54b4ac1f1ae8240aULL;
+  static const uint64_t static_value1 = 0xda5909fbe378aeafULL;
+  static const uint64_t static_value2 = 0x85e547e830cc1bb7ULL;
 };
 
 template<class ContainerAllocator>
@@ -129,7 +129,7 @@ template<class ContainerAllocator>
 struct Definition< ::Planner::Mood_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "int32 mood\n\
+    return "int32 data\n\
 \n\
 ";
   }
@@ -150,7 +150,7 @@ template<class ContainerAllocator> struct Serializer< ::Planner::Mood_<Container
 {
   template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
   {
-    stream.next(m.mood);
+    stream.next(m.data);
   }
 
   ROS_DECLARE_ALLINONE_SERIALIZER;
@@ -168,8 +168,8 @@ struct Printer< ::Planner::Mood_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const  ::Planner::Mood_<ContainerAllocator> & v) 
   {
-    s << indent << "mood: ";
-    Printer<int32_t>::stream(s, indent + "  ", v.mood);
+    s << indent << "data: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.data);
   }
 };
 

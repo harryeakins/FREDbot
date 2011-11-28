@@ -1,4 +1,4 @@
 (cl:in-package Planner-msg)
-(cl:export '(MOOD-VAL
-          MOOD
+(cl:export '(DATA-VAL
+          DATA
 ))
