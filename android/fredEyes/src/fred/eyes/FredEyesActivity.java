@@ -13,6 +13,7 @@ import android.graphics.Shader.TileMode;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 
 /**
  * This class provides a basic demonstration of how to write an Android
@@ -30,6 +31,7 @@ public class FredEyesActivity extends Activity {
 		panel.invalidate();
 		FredEyesServer tempServer = new FredEyesServer(panel);
 		tempServer.execute();
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 	}
 	
 	class Panel extends View {
@@ -43,7 +45,7 @@ public class FredEyesActivity extends Activity {
 //		}
 		
 		public Coordinate focus = new Coordinate(0,0,0);
-		public int happiness = 1;
+		public int happiness = 2;
 		public int happyOffset=3;
 		String text = "defaulty";
 
