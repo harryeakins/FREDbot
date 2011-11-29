@@ -43,7 +43,7 @@ public class FredEyesActivity extends Activity {
 //		}
 		
 		public Coordinate focus = new Coordinate(0,0,0);
-		public int happiness = 0;
+		public int happiness = 1;
 		public int happyOffset=3;
 		String text = "defaulty";
 
