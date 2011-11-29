@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-
 import sys
+import time
 
 from data import FredEyes
 from data.ttypes import *
@@ -13,7 +12,7 @@ from thrift.protocol import TBinaryProtocol
 
 try:
     # Make socket
-    transport = TSocket.TSocket('192.168.1.91', 9090)
+    transport = TSocket.TSocket(sys.argv[1], 9090)
     
     # Buffering is critical. Raw sockets are very slow
     transport = TTransport.TBufferedTransport(transport)
@@ -27,10 +26,20 @@ try:
     # Connect!
     transport.open()
     
-    client.setHappiness(3)
-    print "happy"
     
-    transport.close()
+    def listener():
+        rospy.init_node('FredEyes', anonymous=True)
+        rospy.Subscriber("setHappiness", int , client.setHappiness)
+        rospy.Subscriber("setFocus", Location , client.setFocus)
+        rospy.spin()
+    
+    if __name__ == '__main__':
+    listener()
 
 except Thrift.TException, tx:
     print "%s" % (tx.message)
+
+except IndexError, e:
+    print "Usage: python FredEyesClient.py [ip_address]/n"
+finally:
+    transport.close()
