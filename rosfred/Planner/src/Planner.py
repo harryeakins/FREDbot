@@ -16,8 +16,7 @@ def publishMood(msg):
 	if msg.obj_detected == 0:
 		pub.publish(-100)
 		rospy.loginfo(rospy.get_name()+"Detected not bottle")
-
-	if msg.obj_detected == 1:
+	elif msg.obj_detected == 1:
 		pub.publish(100)
 		rospy.loginfo(rospy.get_name()+"Bottle detected")
 
