@@ -3,5 +3,7 @@
   (:export
    "<MOOD>"
    "MOOD"
+   "<BOTTLE>"
+   "BOTTLE"
   ))
 
