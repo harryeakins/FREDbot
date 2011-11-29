@@ -9,6 +9,8 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 #  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
 #set(ROS_BUILD_TYPE RelWithDebInfo)
 
+
+
 rosbuild_init()
 
 #set the default path for built executables to the "bin" directory
@@ -28,6 +30,7 @@ rosbuild_genmsg()
 #rosbuild_link_boost(${PROJECT_NAME} thread)
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
-rosbuild_add_executable(lid_angle_pub src/lid_angle_pub.cpp)
-rosbuild_add_executable(lid_angle_sub src/lid_angle_sub.cpp)
+remove_definitions(-WAll)
+rosbuild_add_executable(lid_angle_pub src/lid_angle_pub.cpp src/serial_utils.cpp)
+rosbuild_add_executable(lid_angle_sub src/lid_angle_sub.cpp src/serial_utils.cpp)
 
