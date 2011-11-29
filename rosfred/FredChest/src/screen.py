@@ -33,6 +33,6 @@ def screen():
 if __name__ == '__main__':
     pygame.display.init()
     #screen resolution: (0,0) is current, flags: pygame.FULLSCREEN for fullscreen, depth.
-    screenplane = pygame.display.set_mode((0,0),0,0)
+    screenplane = pygame.display.set_mode((0,0),pygame.FULLSCREEN,0)
     screen()
 	
