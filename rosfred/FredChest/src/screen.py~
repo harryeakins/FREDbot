@@ -5,8 +5,6 @@ import pygame.display
 from Planner.msg import Mood
 from std_msgs.msg import String
 
-
-
 def callback(message):
 	#-100 to 100 input moved to 0 to 200 and normalized over 255.
     level = int(((message.data+100)%201)*1.275)
@@ -25,7 +23,7 @@ def callbackscreen(message):
 		rospy.loginfo(rospy.get_name()+"Closing fullscreen mode")	
 
 def screen():
-    rospy.init_node('screen', anonymous=True)
+    rospy.init_node('screen')
     rospy.Subscriber("mood", Mood, callback)
     rospy.Subscriber("screen",String, callbackscreen)
     rospy.spin()
