@@ -26,27 +26,17 @@ try:
     # Connect!
     transport.open()
     
-    client.setFocus(Location(int(sys.argv[2]),int(sys.argv[3]),int(sys.argv[4])))
-    print "focus moved"
+    #client.setFocus(Location(int(sys.argv[2]),int(sys.argv[3]),int(sys.argv[4])))
+    #print "focus moved"
 
-    client.setHappiness(int(sys.argv[5]))
-    if int(sys.argv[5])>0:
+    for i in range (10):
+        client.setHappiness(int(sys.argv[2]))
+        time.sleep(0.3)
+    
+    if int(sys.argv[2])>0:
         print "happy"
     else:
         print "sad"
-    i=0
-    happiness=0
-    while i<2000:
-        happiness+=1
-        if happiness>3:
-            happiness=-3
-        x=50*sin(3.14/180*i)
-        y=50*cos(3.14/180*i)
-        i+=20
-        client.setHappiness(happiness)
-        client.setFocus(Location(int(x),int(y),0))
-        print happiness
-        time.sleep(0.3)
         
 
 except Thrift.TException, tx:

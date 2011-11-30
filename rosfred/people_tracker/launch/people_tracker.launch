@@ -1,0 +1,10 @@
+<launch>
+
+  <group>
+    <node name="people_tracker" pkg="people_tracker" type="people_tracker">
+      <param name="load_filepath" value="$(find people_tracker)/params/SamplesConfig.xml" />
+
+    </node>
+  </group>
+
+</launch>

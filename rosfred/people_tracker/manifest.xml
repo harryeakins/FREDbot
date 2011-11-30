@@ -1,0 +1,23 @@
+<package>
+  <description brief="people_tracker">
+
+    People tracker Package
+
+  </description>
+  <author>Robert Tod</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://www.ros.org/wiki/pi_tracker</url>
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="std_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="nav_msgs"/>
+  <depend package="tf"/>
+  <depend package="urdf"/>
+  <depend package="rviz"/>
+  <depend package="kdl"/>
+  <depend package="nite"/>
+</package>
+
+

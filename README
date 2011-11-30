@@ -1,4 +1,3 @@
-
        `----------------       
       -s..---....---..d`      
       -s  .``.  .``.  d`      
@@ -44,5 +43,5 @@ Arduino code
 == /docs ==
 Documentation and reports
 
-== /ros ==
+== /rosfred ==
 ROS packages
