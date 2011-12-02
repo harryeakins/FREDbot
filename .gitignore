@@ -2,4 +2,7 @@
 rosfred/freduino/bin/*
 rosfred/freduino/build/*
 rosfred/freduino/msg_gen/*
-rosfred/freduino/src/freduino/*
+rosfred/freduino/src/freduino/*a
+*.pyc
+*~
+
