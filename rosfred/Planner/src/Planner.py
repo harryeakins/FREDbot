@@ -5,23 +5,45 @@ from std_msgs.msg import String
 from Planner.msg import Mood
 from Planner.msg import Bottle
 
+mood_value = 0
 pub = rospy.Publisher("mood", Mood)
-rospy.init_node('Planner')
 
-def bottleDetection():
-    rospy.Subscriber("bottle", Bottle, publishMood)
-    rospy.spin()
+def initPlanner():
+	rospy.init_node('Planner')
+	rospy.Subscriber("bottle", Bottle, objectDetected)
+	while not rospy.is_shutdown():
+		rospy.sleep(20.0)
+		neutraliseMood(1)
 
-def publishMood(msg):
+def updateMood(change):
+	global mood_value
+	mood_value += change
+	if mood_value > 100:
+		mood_value = 100
+	elif mood_value < -100:
+		mood_value = -100
+	pub.publish(mood_value)
+
+def neutraliseMood(change):
+	global mood_value
+	if mood_value > 0:
+		rospy.loginfo("Neutralising mood by %i",change)
+		updateMood(-change)
+	elif mood_value < 0:
+		rospy.loginfo("Neutralising mood by %i",change)
+		updateMood(change)
+
+
+def objectDetected(msg):
 	if msg.obj_detected == 0:
-		pub.publish(-100)
+		updateMood(-15)
 		rospy.loginfo(rospy.get_name()+"Detected not bottle")
 	elif msg.obj_detected == 1:
-		pub.publish(100)
+		updateMood(20)
 		rospy.loginfo(rospy.get_name()+"Bottle detected")
 
 
 if __name__ == '__main__':
     try:
-        bottleDetection()
+		initPlanner()
     except rospy.ROSInterruptException: pass
