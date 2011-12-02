@@ -16,14 +16,16 @@ void chatterCallback(const freduino::Angle::ConstPtr& msg)
 
 	printf("%c%c\n", data[0], data[1]);
 
-	unsigned char data2[5];
+	unsigned char data2[6];
 	data2[0] = 'S';
 	data2[1] = 'M';
 	data2[2] = static_cast<unsigned char>(data[0]);
 	data2[3] = static_cast<unsigned char>(data[1]);
 	data2[4] = '.';
+	data2[5] = '\n';
 
-	write_data(serial_port, data2, 5);
+	write_data(serial_port, data2, 6);
+//	flush(serial_port);
 }
 
 int main(int argc, char **argv)

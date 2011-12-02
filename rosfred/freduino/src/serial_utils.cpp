@@ -30,13 +30,16 @@ int configure_port(int fd)      // configure the port
 {
     struct termios port_settings;      // structure to store the port settings in
     
-    cfsetispeed(&port_settings, B19200);    // set baud rates
-    cfsetospeed(&port_settings, B19200);
+    cfsetispeed(&port_settings, B57600);    // set baud rates
+    cfsetospeed(&port_settings, B57600);
     
     port_settings.c_cflag &= ~PARENB;    // set no parity, stop bits, data bits
     port_settings.c_cflag &= ~CSTOPB;
     port_settings.c_cflag &= ~CSIZE;
     port_settings.c_cflag |= CS8;
+	port_settings.c_cflag &= ~CRTSCTS;	// Disable hardware flow control.
+	port_settings.c_iflag &= ~IXON;		// Disable software flow control
+	port_settings.c_iflag &= ~IXOFF;
     
     tcsetattr(fd, TCSANOW, &port_settings);    // apply the settings to the port
     return(fd);
@@ -45,21 +48,25 @@ int configure_port(int fd)      // configure the port
 
 int write_data(int fd, unsigned char * data, int len)   // query modem with an AT command
 {
-    char n;
-    fd_set rdfs;
-    struct timeval timeout;
-    
-    // initialise the timeout structure
-    timeout.tv_sec = 10; // ten second timeout
-    timeout.tv_usec = 0;
-    
     //Create byte array
    // unsigned char send_bytes[] = { 0xbe, 0xef, 0x03, 0x06, 0x00, 0x19, 0xd3, 0x02, 0x00, 0x00, 0x60, 0x00, 0x00};
    // unsigned char send_bytes[] = {0xbe, 0xef, 0x03, 0x06, 0x00, 0xba, 0xd2, 0x01, 0x00, 0x00, 0x60, 0x01, 0x00};
-    
-    
-    write(fd, data, len);  //Send data
-    printf("Wrote the bytes. \n");
+	char randomshit[1];
+	fd_set fds;
+	FD_ZERO(&fds);
+	FD_SET(fd, &fds);
+	struct timeval timeout;
+	timeout.tv_sec = 1;
+	timeout.tv_usec = 0;
+	for (int i = 0; i<len; i++) {   
+	   	while (0 != select(1, &fds, 0, 0, &timeout)) {
+   			read(fd, randomshit, 1);
+		}
+    	
+		write(fd, &(data[i]), 1);  //Send data
+	//	sleep(1);
+		printf("Wrote the bytes. \n");
+	}
     /*
     // do the select
     n = select(fd + 1, &rdfs, NULL, NULL, &timeout);
