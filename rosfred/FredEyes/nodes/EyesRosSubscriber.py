@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+import roslib; roslib.load_manifest('FredEyes')
+import rospy
+from std_msgs.msg import Int32
+from geometry_msgs.msg import Vector3
+
 
 import sys
 import time
@@ -12,36 +17,49 @@ from thrift.transport import TSocket
 from thrift.transport import TTransport
 from thrift.protocol import TBinaryProtocol
 
-def listener():
-    try:
-        # Make socket
-        transport = TSocket.TSocket(sys.argv[1], 9090)
+    
+class Listener():
+    def run(self):
+        try:
+            transport = TSocket.TSocket(sys.argv[1], 9090)
+            try:
+                # Buffering is critical. Raw sockets are very slow
+                transport = TTransport.TBufferedTransport(transport)
 
-        # Buffering is critical. Raw sockets are very slow
-        transport = TTransport.TBufferedTransport(transport)
+                # Wrap in a protocol
+                protocol = TBinaryProtocol.TBinaryProtocol(transport)
 
-        # Wrap in a protocol
-        protocol = TBinaryProtocol.TBinaryProtocol(transport)
+                # Create a client to use the protocol encoder
+                self.client = FredEyes.Client(protocol)
 
-        # Create a client to use the protocol encoder
-        client = FredEyes.Client(protocol)
+                # Connect!
+                transport.open()
+                
+        ################### ROS code ######################################
+                rospy.init_node('FredEyes', anonymous=True)
+                rospy.Subscriber("setHappiness", Int32, self.setHappiness)
+                rospy.Subscriber("setFocus", Vector3, self.setFocus)
+                print "Spinning!"
+                rospy.spin() 
+        ##################################################################
 
-        # Connect!
-        transport.open()
-        
-################### ROS code ######################################
-        rospy.init_node('FredEyes', anonymous=True)
-        rospy.Subscriber("setHappiness", int , client.setHappiness)
-        rospy.Subscriber("setFocus", Location , client.setFocus)
-        rospy.spin() 
-##################################################################
+            except Thrift.TException, tx:
+                print "%s" % (tx.message)
+            finally:
+                transport.close()
 
-    except Thrift.TException, tx:
-        print "%s" % (tx.message)
-    except IndexError, e:
-        print "Usage: python FredEyesClient.py [ip_address]/n"
-    finally:
-        transport.close()
+        except IndexError, e:
+            print "Usage: python FredEyesClient.py [ip_address]\n"
+
+    def setFocus(self, data):
+        loc = Location(data.x, data.y, data.z)
+        self.client.setFocus(loc)
+
+    def setHappiness(self, data):
+        happiness = data.data
+        self.client.setHappiness(happiness)
 
 if __name__ == '__main__':
-    listener()
+    l = Listener()
+    l.run()
+
