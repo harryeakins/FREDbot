@@ -27,12 +27,13 @@ def listener():
         # Connect!
         transport.open()
         
-        # ROS code
+################### ROS code ######################################
         rospy.init_node('FredEyes', anonymous=True)
         rospy.Subscriber("setHappiness", int , client.setHappiness)
         rospy.Subscriber("setFocus", Location , client.setFocus)
-        rospy.spin()
-    
+        rospy.spin() 
+##################################################################
+
     except Thrift.TException, tx:
         print "%s" % (tx.message)
     except IndexError, e:
