@@ -1,0 +1,32 @@
+=== README for FredEyes ===
+Contributors: Yiqi Zeng, Harry Eakins
+Requires at least: Andorid 3.2, API version 13
+
+This application is written for 
+Imperial College Electrical and Electronic Department 4th year course Human Centred Robotics.
+It displays two eyes on a Android device screen to show the expression and focus of a robot.
+
+=== Use this application ===
+Inputs:
+ 	1. Focus, it is a location variable (x,y,z) where x is the horizontal directon, y is vertical and z is distance
+ 	   All of x, y, z are integers in the range of -1000 to 1000
+ 	2. Hapiness, it is an integer variable in the range of -10 to 10
+ 	
+Focus and mood to display can be controlled wirelessly through the Apache Thrift service.
+The python file py-impl/EyesRosSubscriber.py can act as a translator between ROS node and the Thrift
+and make this application subsribe to a ROS node
+py-impl/FredEyesPyExample is a example python code to change focus and mood manually.
+
+=== notes in installing ===
+1. The eyes are displayed on a landscape screen, currently on a Motorola xzoom.
+
+2. To stop/remove/disable the system bar, run the following codes in adb:
+	$ service call activity 79 s16 com.android.systemui
+   To restore the system bar just simply issue this command:
+	$ am startservice -n com.android.systemui/.SystemUIService
+   more information: http://stackoverflow.com/questions/5109988/is-there-a-way-to-hide-the-system-bar-in-android-3-0-its-an-internal-device-an?tab=oldest
+ 
+ 
+=== further developement ===
+1. more expressions can be achieved by adding more eye masks in teh res/drawable-mdpi and edit the emotionMask and freePupilSpace info accordingly in FredEyesActivity.jav
+2. change all the hard coded numbers in the FredEyesActivity to be numbers scaled according to screen size to make this application suitable for other devices
