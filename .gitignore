@@ -6,4 +6,4 @@ rosfred/freduino/src/freduino/*
 rosfred/*/build/*
 *.pyc
 *~
-
+*.pyc
