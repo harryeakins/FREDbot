@@ -16,11 +16,11 @@ void chatterCallback(const freduino::Angle::ConstPtr& msg)
 
 	printf("%c%c\n", data[0], data[1]);
 
-	unsigned char data2[6];
+	char data2[6];
 	data2[0] = 'S';
 	data2[1] = 'M';
-	data2[2] = static_cast<unsigned char>(data[0]);
-	data2[3] = static_cast<unsigned char>(data[1]);
+	data2[2] = data[0];
+	data2[3] = data[1];
 	data2[4] = '.';
 	data2[5] = '\n';
 
@@ -34,8 +34,8 @@ int main(int argc, char **argv)
 	ros::init(argc, argv, "test_lid_angle_sub");
 	
 	// Open and Configure the Serial Port to the Arduino
-	serial_port = open_port();
-	serial_port = configure_port(serial_port);
+	// F is the identity of the freduino arduino
+	serial_port = open_port('F');
 
 	// Create the ROS node and start the event loop.
 	ros::NodeHandle n;
