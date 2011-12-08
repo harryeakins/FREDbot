@@ -19,12 +19,36 @@ typedef enum {
 State_t;
 State_t state;
 
+class usSensor {
+  int trig, echo;
+public:
+  void attach(int trig_pin, int echo_pin) {
+    trig = trig_pin;
+    echo = echo_pin;
+
+    pinMode(trig_pin, OUTPUT);
+    digitalWrite(trig_pin, LOW);
+    pinMode(echo_pin, INPUT);
+  }
+
+  long read() {
+    digitalWrite(trig, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trig, LOW);
+    return pulseIn(echo, HIGH, 50000);
+  }
+};
+
+usSensor mid_sensor, right_sensor, left_sensor;
 
 void setup() {
   neck_servo.attach(NECK_SERVO_PIN);
   mouth_servo.attach(MOUTH_SERVO_PIN);
   body_servo.attach(BODY_SERVO_PIN);
 
+  left_sensor.attach(8, 9);
+  right_sensor.attach(10, 11);
+  mid_sensor.attach(12, 13);
   Serial.begin(57600);
 
   state = WAITING;
@@ -53,6 +77,16 @@ void loop() {
         next_state = READ;
       } 
       else if(inByte == '.') {
+        switch(inNum) {
+        case 1:
+          Serial.println(left_sensor.read()); 
+          break;
+        case 2:
+          Serial.println(mid_sensor.read()); 
+          break;
+        case 3:
+          Serial.println(right_sensor.read());
+        }
         next_state = WAITING;
       }
       break;
@@ -90,4 +124,6 @@ void loop() {
     state = next_state;
   }
 }
+
+
 
