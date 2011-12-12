@@ -1,0 +1,4 @@
+<launch>
+  <node name="Planner" pkg="Planner" type="Planner.py" /> 	
+  <node name="Screen" pkg="FredChest" type="screen.py" />
+</launch>
