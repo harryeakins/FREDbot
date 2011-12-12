@@ -36,13 +36,23 @@ def callback(message):
 		rospy.loginfo(rospy.get_name()+" Bottle detected")
 	else: 
 		picture = bottle_pic
+	
+	#new colour calculation, with skipping gradient near zero
+	if message.data > 0:
+		level = int(message.data*1.55)+100
+		screenplane.fill((level,level,0,0))
+	elif message.data < 0:
+		level = int(abs(message.data)*1.55)+100
+		screenplane.fill((0,0,level,0))
+	else:
+		level = 0
+		screenplane.fill((0,0,0,0))
 
-	#-100 to 100 input moved to 0 to 200 and normalized over 255.
-	level = int(((message.data+100)%201)*1.275)
+	#old calculation
+	#level = int(((message.data+100)%201)*1.275)
 	rospy.loginfo(rospy.get_name()+" Mood input: %i, rg(not b) level: %i",message.data,level)
 	#colors are set at 255,255,0 when happy (yellow), downto to 0,0,255 when sad (blue)
-	#at neutral it is grey coloured
-	screenplane.fill((level,level,255-level,0))
+	#at neutral it is black
 	screenplane.blit(picture, (0, 0))
 	pygame.display.update()
 
