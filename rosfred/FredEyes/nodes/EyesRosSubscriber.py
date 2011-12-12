@@ -21,7 +21,7 @@ from thrift.protocol import TBinaryProtocol
 class Listener():
     def run(self):
         try:
-            transport = TSocket.TSocket(sys.argv[1], 9090)
+            transport = TSocket.TSocket(rospy.get_param("/FredEyes/tablet_ip"), 9090)
             try:
                 # Buffering is critical. Raw sockets are very slow
                 transport = TTransport.TBufferedTransport(transport)
@@ -37,8 +37,8 @@ class Listener():
                 
         ################### ROS code ######################################
                 rospy.init_node('FredEyes', anonymous=True)
-                rospy.Subscriber("setHappiness", Int32, self.setHappiness)
-                rospy.Subscriber("setFocus", Vector3, self.setFocus)
+                rospy.Subscriber("setHappiness", Int32, self.setHappiness, queue_size=1)
+                rospy.Subscriber("setFocus", Vector3, self.setFocus, queue_size=1)
                 print "Spinning!"
                 rospy.spin() 
         ##################################################################
@@ -46,6 +46,7 @@ class Listener():
             except Thrift.TException, tx:
                 print "%s" % (tx.message)
             finally:
+		print "Problem!"
                 transport.close()
 
         except IndexError, e:
