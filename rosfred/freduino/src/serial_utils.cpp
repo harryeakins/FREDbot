@@ -16,7 +16,7 @@ int open_port(const char id)
 	    char dev_name[100];
 	    sprintf(dev_name, "/dev/ttyUSB%d", i);
 
-	    fd = open(dev_name, O_RDWR | O_NOCTTY | O_NDELAY);
+	    fd = open(dev_name, O_RDWR | O_NOCTTY);
 	    if(fd == -1) // if open is unsucessful
 	    {
 		printf("Unable to open %s. \n", dev_name);
