@@ -79,13 +79,14 @@ void loop() {
       else if(inByte == '.') {
         switch(inNum) {
         case 1:
-          Serial.println(left_sensor.read()); 
+          Serial.print(left_sensor.read()); 
           break;
         case 2:
-          Serial.println(mid_sensor.read()); 
+          Serial.print(mid_sensor.read()); 
           break;
         case 3:
-          Serial.println(right_sensor.read());
+          Serial.print(right_sensor.read());
+          break;
         }
         next_state = WAITING;
       }
@@ -116,7 +117,7 @@ void loop() {
           mouth_servo.write(inNum+60);
         }
         if(state == BODY) body_servo.write(inNum);
-        if(state == NECK) neck_servo.write(inNum);
+        if(state == NECK) neck_servo.write(inNum+50);
         next_state = WAITING;
       }
       break;
