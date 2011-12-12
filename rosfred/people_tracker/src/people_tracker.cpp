@@ -117,7 +117,7 @@ int main(int argc, char** argv)
   g_people_tracker.init();
   g_kinect_controller.init(filepath.c_str(), false);
   
-	while(true){
+	while(ros::ok()){
 		xn::SceneMetaData sceneMD;
   		g_kinect_controller.getContext().WaitAndUpdateAll();
   		g_people_tracker.processKinect(g_kinect_controller);
