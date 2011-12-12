@@ -1,8 +1,10 @@
+#include <Servo.h>
+
 //This program is used for obtaining the value of a object at the sensor
 //Used for calibration of the bottle sensor.
 #define PIN A0
-#define LOWERBOUND 120
-#define UPPERBOUND 195 //230 - bottle 100%      250 - original  THIS NEEDS TO BE LOWERED!!!!
+#define LOWERBOUND 140
+#define UPPERBOUND 210 //230 - bottle 100%      250 - original  THIS NEEDS TO BE LOWERED!!!!
 const int numReadings = 30;
 int total = 0;
 int readings[numReadings];
@@ -53,7 +55,7 @@ void loop()
   if(trigger_count > 20)
   {
     trigger_count = 0;
-    while( (inactive_count < 20) )
+    while( (inactive_count < 30) )
     {
       if(Serial.available()) {
         inByte = Serial.read();
@@ -61,7 +63,7 @@ void loop()
           Serial.print("iB");
         } 
       }
-
+      
       average = getAverage();
       if( (average > LOWERBOUND) && (average < UPPERBOUND) )
       {
@@ -79,8 +81,8 @@ void loop()
       if( (bottle_count > 20000) || (not_bottle_count > 20000) )
       {
         Serial.print("C"); 
-        delay(1000); //Output that it is choking every second
-        inactive_count = 21; //break the loop
+        inactive_count = 31; //break the loop
+        delay(500); //Output that it is choking 1/2 every second
         choking = 1;  
       }
 
