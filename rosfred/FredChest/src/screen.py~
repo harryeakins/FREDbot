@@ -8,9 +8,10 @@ from Planner.msg import Bottle
 from std_msgs.msg import String
 import os
 
-bottle_pic = pygame.image.load("bottle.png")
-bottle_cross = pygame.image.load("bottle-cross.png")
-bottle_tick = pygame.image.load("bottle-tick.png")
+pckpath = roslib.packages.get_pkg_dir("FredChest")
+bottle_pic = pygame.image.load(pckpath+"/bottle.png")
+bottle_cross = pygame.image.load(pckpath+"/bottle-cross.png")
+bottle_tick = pygame.image.load(pckpath+"/bottle-tick.png")
 picture = bottle_pic
 
 def callbackscreen(message):
@@ -35,7 +36,6 @@ def callback(message):
 		rospy.loginfo(rospy.get_name()+" Bottle detected")
 	else: 
 		picture = bottle_pic
-		rospy.loginfo(rospy.get_name()+" Bottle picture reset")
 
 	#-100 to 100 input moved to 0 to 200 and normalized over 255.
 	level = int(((message.data+100)%201)*1.275)
@@ -45,9 +45,6 @@ def callback(message):
 	screenplane.fill((level,level,255-level,0))
 	screenplane.blit(picture, (0, 0))
 	pygame.display.update()
-
-def objectDetected(msg):
-
 
 def screen():
 	rospy.init_node('screen')
@@ -59,6 +56,7 @@ if __name__ == '__main__':
 	pygame.display.init()
 	#current path of the screen.py
 	print "current path of the screen.py"+os.getcwd()
+	print 
 	#screen resolution: (0,0) is current, flags: pygame.FULLSCREEN for fullscreen, depth.
 	screenplane = pygame.display.set_mode((0,0),pygame.FULLSCREEN | pygame.DOUBLEBUF | pygame.HWSURFACE,0)
 	screenplane.blit(picture, (0, 0))
