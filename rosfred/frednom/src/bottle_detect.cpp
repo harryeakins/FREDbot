@@ -1,5 +1,5 @@
 #include "ros/ros.h"
-#include <std_msgs/Bool.h>
+#include <Planner/Bottle.h>
 #include "serial_utils.h"
 
 static int serial_port;
@@ -15,33 +15,32 @@ int main(int argc, char **argv)
 
 	// Create the ROS node and start the event loop.
 	ros::NodeHandle n;
-	ros::Publisher isObjectBottle = n.advertise<std_msgs::Bool>("isBottle", 10);
-	ros::Publisher isFREDChoking = n.advertise<std_msgs::Bool>("isChoking", 10);
+	ros::Publisher pub = n.advertise<Planner::Bottle>("bottle", 10);
 
 	ros::Rate loop_rate(10);
 	while(ros::ok()) {
 		char response[100];
-		std_msgs::Bool isBottle;
-		std_msgs::Bool isChoking;
+		Planner::Bottle msg;
 
 		//Bottle Detection
 		if(read_data(serial_port, response, 100) >0)
 		{
-
+			msg.choking = 0;
 			switch (response[0]) {
 				case 'B':
-				isBottle.data = true;
-				isObjectBottle.publish(isBottle);
+				msg.obj_detected = 1;
+				pub.publish(msg);
 				break;
 
 				case 'N':
-				isBottle.data = false;
-				isObjectBottle.publish(isBottle);
+				msg.obj_detected = 0;
+				pub.publish(msg);
 				break;
 
 				case 'C':
-				isChoking.data = true;
-				isFREDChoking.publish(isChoking);
+				msg.obj_detected = 2;
+				msg.choking = 1;
+				pub.publish(msg);
 				break;
 
 			}
