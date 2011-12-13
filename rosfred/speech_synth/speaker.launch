@@ -1,0 +1,4 @@
+<launch>
+  <node name="Planner" pkg="speech_synth" type="speech_synth" /> 	
+  <node name="Screen" pkg="speech_synth" type="talker" />
+</launch>
