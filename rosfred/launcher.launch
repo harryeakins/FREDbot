@@ -1,4 +1,5 @@
 <launch>
   <node name="Planner" pkg="Planner" type="Planner.py" /> 	
   <node name="Screen" pkg="FredChest" type="screen.py" />
+  <node name="bottle_detect_pub" pkg="frednom" type="bottle_detect_pub" />
 </launch>
