@@ -58,8 +58,7 @@ def screen():
 	rospy.init_node('screen')
 	rospy.Subscriber("mood", Mood, callback)
 	rospy.Subscriber("screen",String, callbackscreen)
-	while not rospy.is_shutdown():
-		rospy.sleep(1.0)
+	rospy.spin()
 
 if __name__ == '__main__':
 	os.system("xrandr -o normal")
