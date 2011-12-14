@@ -1,5 +1,22 @@
 <launch>
+
+  <group>
+    <node name="people_tracker" pkg="people_tracker" type="people_tracker">
+      <param name="load_filepath" value="$(find people_tracker)/params/SamplesConfig.xml" />
+	<remap from="closestPerson" to="setFocus"/>
+      <param name="kinect_distance" value="1000" />
+    </node>
+ <!--
+  <node name="FredEyes" pkg="FredEyes" type="EyesRosSubscriber.py">
+     <param name="tablet_ip" value="brogos.homeip.net" />
+   </node>
+-->
+   <node name="freduino" pkg="freduino" type="lid_angle_sub">
+   </node>
+  <node name="bottle_detect_pub" pkg="frednom" type="bottle_detect_pub" />	
   <node name="Planner" pkg="Planner" type="Planner.py" /> 	
   <node name="Screen" pkg="FredChest" type="screen.py" />
-  <node name="bottle_detect_pub" pkg="frednom" type="bottle_detect_pub" />
+
+  </group>
+
 </launch>
