@@ -1,6 +1,6 @@
 ~.DS_Store
-rosfred/freduino/bin/*
-rosfred/freduino/build/*
+rosfred/**/bin/*
+rosfred/**/build/*
 rosfred/freduino/msg_gen/*
 rosfred/freduino/src/freduino/*
 rosfred/*/build/*
