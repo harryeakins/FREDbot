@@ -1,0 +1,18 @@
+<package>
+  <description brief="turnhead">
+
+     turnhead
+
+  </description>
+  <author>fredbot</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/turnhead</url>
+  <depend package="rospy"/>
+  <depend package="std_msgs"/>
+  <depend package="freduino"/>
+  <depend package="people_tracker"/>
+
+</package>
+
+
