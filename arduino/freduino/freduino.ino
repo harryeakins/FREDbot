@@ -114,10 +114,10 @@ void loop() {
       } 
       else if(inByte == '.') {
         if(state == MOUTH) {
-          mouth_servo.write(inNum+60);
+          mouth_servo.write(inNum+60)
         }
         if(state == BODY) body_servo.write(inNum);
-        if(state == NECK) neck_servo.write(inNum+50);
+        if(state == NECK) neck_servo.write(int(float(inNum)*1.2)+50);
         next_state = WAITING;
       }
       break;
