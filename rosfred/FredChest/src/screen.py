@@ -11,7 +11,7 @@ import os
 
 def callbackscreen(message):
 	if message.data == "full":
-		screenplane = pygame.display.set_mode((0,0),pygame.FULLSCREEN | pygame.DOUBLEBUF | pygame.HWSURFACE,0)
+		screenplane = pygame.display.set_mode((0,0),pygame.FULLSCREEN ,0)
 		displayPicture()
 		rospy.loginfo(rospy.get_name()+" Switching to fullscreen mode")
 	elif message.data == "close":
@@ -73,5 +73,8 @@ if __name__ == '__main__':
 	bottle_tick = pygame.transform.rotate(bottle_tick, -90)
 	picture = bottle_pic
 	displayPicture()
-	screen()
+	try:
+		screen()
+	except rospy.ROSInterruptException: pass
+	
 	
