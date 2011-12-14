@@ -8,23 +8,22 @@ from Planner.msg import Bottle
 from std_msgs.msg import String
 import os
 
-pckpath = roslib.packages.get_pkg_dir("FredChest")
-bottle_pic = pygame.image.load(pckpath+"/bottle.png")
-bottle_cross = pygame.image.load(pckpath+"/bottle-cross.png")
-bottle_tick = pygame.image.load(pckpath+"/bottle-tick.png")
-picture = bottle_pic
 
 def callbackscreen(message):
 	if message.data == "full":
 		screenplane = pygame.display.set_mode((0,0),pygame.FULLSCREEN | pygame.DOUBLEBUF | pygame.HWSURFACE,0)
-		screenplane.blit(picture, (0, 0))
-		pygame.display.update()
+		displayPicture()
 		rospy.loginfo(rospy.get_name()+" Switching to fullscreen mode")
 	elif message.data == "close":
+		os.system("xrandr -o right")
 		screenplane = pygame.display.set_mode((0,0),0,0)
-		screenplane.blit(picture, (0, 0))
-		pygame.display.update()
-		rospy.loginfo(rospy.get_name()+" Closing fullscreen mode")	
+		displayPicture()
+		rospy.loginfo(rospy.get_name()+" Closing fullscreen mode")
+
+def displayPicture():
+	screenplane.blit(picture, (0, 0))
+	pygame.display.update()
+	
 
 def callback(message):
 	global picture
@@ -53,20 +52,27 @@ def callback(message):
 	rospy.loginfo(rospy.get_name()+" Mood input: %i, rg(not b) level: %i",message.data,level)
 	#colors are set at 255,255,0 when happy (yellow), downto to 0,0,255 when sad (blue)
 	#at neutral it is black
-	screenplane.blit(picture, (0, 0))
-	pygame.display.update()
+	displayPicture()
 
 def screen():
 	rospy.init_node('screen')
 	rospy.Subscriber("mood", Mood, callback)
 	rospy.Subscriber("screen",String, callbackscreen)
-	rospy.spin()
+	while not rospy.is_shutdown():
+		rospy.sleep(1.0)
 
 if __name__ == '__main__':
+	os.system("xrandr -o normal")
 	pygame.display.init()
-	#screen resolution: (0,0) is current, flags: pygame.FULLSCREEN for fullscreen, depth.
-	screenplane = pygame.display.set_mode((0,0),pygame.FULLSCREEN | pygame.DOUBLEBUF | pygame.HWSURFACE,0)
-	screenplane.blit(picture, (0, 0))
-	pygame.display.update()
+	screenplane = pygame.display.set_mode((0,0),pygame.FULLSCREEN ,0)
+	pckpath = roslib.packages.get_pkg_dir("FredChest")
+	bottle_pic = pygame.image.load(pckpath+"/bottle.png")
+	bottle_pic = pygame.transform.rotate(bottle_pic, -90)
+	bottle_cross = pygame.image.load(pckpath+"/bottle-cross.png")
+	bottle_cross = pygame.transform.rotate(bottle_cross, -90)
+	bottle_tick = pygame.image.load(pckpath+"/bottle-tick.png")
+	bottle_tick = pygame.transform.rotate(bottle_tick, -90)
+	picture = bottle_pic
+	displayPicture()
 	screen()
 	
