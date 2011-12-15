@@ -109,7 +109,7 @@ namespace people_tracker
 		
 		closestMsg.x = (int)(1300*theta/PI);
 		closestMsg.y = com.Y;
-		closestMsg.z = com.Z;
+		closestMsg.z = com.Z - kinectDistance;
 		
 		closest_person_pub.publish(closestMsg);
 		
