@@ -12,6 +12,7 @@ int open_port(const char id)
 {
     int fd; // file description for the serial port
     
+while(1)
     for(int i = 0; i < 10; i++) {
 	    char dev_name[100];
 	    sprintf(dev_name, "/dev/ttyUSB%d", i);
@@ -43,6 +44,7 @@ int open_port(const char id)
 			// habit of changing message cases... weird
 			if(toupper(id) == toupper(response[1])) {
 				printf("Found correct device!\n");
+				return fd;
 			} else {
 				printf("Wrong device!\n");
 				goto failed;
@@ -56,7 +58,6 @@ int open_port(const char id)
 failed:
 	close(fd);
     }
-    
     return(fd);
 } //open_port
 
