@@ -17,8 +17,11 @@ from thrift.transport import TSocket
 from thrift.transport import TTransport
 from thrift.protocol import TBinaryProtocol
 
+import threading
 	
 class Listener():
+	def __init__(self):
+		self.mutex = threading.Lock()
 	def connect(self):
 		transport = TSocket.TSocket(rospy.get_param("/FredEyes/tablet_ip"), 9090)
 		try:
@@ -49,17 +52,27 @@ class Listener():
 
 	def setFocus(self, data):
 		loc = Location(data.x, data.y, data.z)
+		self.mutex.acquire()
 		try:
+			print "setFocus!", time.asctime()
 			self.client.setFocus(loc)
+			print "setFocus finished!", time.asctime()
 		except:
+			print "setFocus failed!", time.asctime()
 			self.connect()
+		self.mutex.release()
 
 	def setHappiness(self, data):
 		happiness = data.data
+		self.mutex.acquire()
 		try:
+			print "setHappiness!", time.asctime()
 			self.client.setHappiness(happiness)
+			print "setHappiness finished!", time.asctime()
 		except:
+			print "setHappiness Failed", time.asctime()
 			self.connect()
+		self.mutex.release()
 
 if __name__ == '__main__':
 	l = Listener()
