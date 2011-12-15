@@ -2,11 +2,13 @@
 import roslib; roslib.load_manifest('Planner')
 import rospy
 from std_msgs.msg import String
+from std_msgs.msg import Int32
 from Planner.msg import Mood
 from Planner.msg import Bottle
 
 mood_value = 0
 pub = rospy.Publisher("mood", Mood)
+just_mood_pub = rospy.Publisher("just_mood", Int32)
 
 def initPlanner():
 	rospy.init_node('Planner')
@@ -23,6 +25,7 @@ def updateMood(change, detection):
 	elif mood_value < -100:
 		mood_value = -100
 	pub.publish(mood_value, detection)
+	just_mood_pub.publish(mood_value)
 
 def neutraliseMood(change):
 	global mood_value
